@@ -1,9 +1,11 @@
-package com.example.apputnsqlite;
+package com.example.apputnsqlite.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.apputnsqlite.classes.Autor;
 
 public class Autores {
 

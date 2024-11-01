@@ -1,4 +1,4 @@
-package com.example.apputnsqlite;
+package com.example.apputnsqlite.classes;
 
 public class Autor {
     public int Id;

@@ -1,4 +1,4 @@
-package com.example.apputnsqlite;
+package com.example.apputnsqlite.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.apputnsqlite.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -37,7 +39,4 @@ public class LoginActivity extends AppCompatActivity {
         i.putExtra("clave", txtClave.getText().toString());
         startActivity(i);
     }
-
-
-
 }

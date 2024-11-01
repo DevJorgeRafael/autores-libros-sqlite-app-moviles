@@ -1,9 +1,7 @@
-package com.example.apputnsqlite;
+package com.example.apputnsqlite.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.apputnsqlite.R;
+import com.example.apputnsqlite.classes.Autor;
+import com.example.apputnsqlite.dao.Autores;
+import com.example.apputnsqlite.dao.Libros;
 
 public class MainActivity extends AppCompatActivity {
 

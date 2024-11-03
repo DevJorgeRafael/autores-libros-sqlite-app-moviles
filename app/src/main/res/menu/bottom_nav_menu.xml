@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Autores"
+        android:icon="@drawable/baseline_people_24"
+        android:id="@+id/menu_autores"/>
+    <item android:title="Libros"
+        android:icon="@drawable/baseline_menu_book_24"
+        android:id="@+id/menu_libros"/>
+</menu>

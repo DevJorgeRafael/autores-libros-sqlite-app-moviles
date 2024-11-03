@@ -3,21 +3,23 @@ package com.example.apputnsqlite.ui;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.apputnsqlite.fragments.AutoresFragment;
+import com.example.apputnsqlite.fragments.LibrosFragment;
 import com.example.apputnsqlite.R;
-import com.example.apputnsqlite.classes.Autor;
 import com.example.apputnsqlite.dao.Autores;
 import com.example.apputnsqlite.dao.Libros;
+import com.example.apputnsqlite.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityMainBinding binding;
     TextView txtId ,txtNombres, txtApellidos, txtIsoPais, txtEdad;
     Autores lsAutores;
     Libros lsLibros;
@@ -27,98 +29,45 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        //listaAutores = new Autores(this, "biblioteca.db", 1);
-        //Autor r = listaAutores.Create(1, "Amado", "Nervo", "CL", 20);
-        //Autor r = listaAutores.Update(1, "AMADO", "NERVO PAREDES", "EC", 45);
-        //Autor r = listaAutores.Read_By_Id(1);
-        //Autor[] r = listaAutores.ReadAll();
 
-        //Log.println(Log.VERBOSE, "VERBOSE", "************* "+r.Nombres);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-
-
-        txtId = findViewById(R.id.txtId);
-        txtNombres = findViewById(R.id.txtNombres);
-        txtApellidos = findViewById(R.id.txtApellidos);
-        txtIsoPais = findViewById(R.id.txtIsoPais);
-        txtEdad = findViewById(R.id.txtEdad);
-        lblUsuario = findViewById(R.id.lblUsuario);
+        lblUsuario = binding.txtUsuario;
         lsAutores = new Autores(this, "biblioteca.db", 1);
 
-        // leer los datos del disccionario Extra
+        // leer los datos del diccionario Extra
         Bundle extra = getIntent().getExtras();
-        if( extra != null ) {
+        if (extra != null) {
             String usuario = extra.getString("usuario");
-            String clave = extra.getString("clave");
             lblUsuario.setText("Bienvenido " + usuario);
         }
+
+        replaceFragment(new AutoresFragment());
+
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.menu_autores) {
+                replaceFragment(new AutoresFragment());
+                return true;
+            } else if (item.getItemId() == R.id.menu_libros) {
+                replaceFragment(new LibrosFragment());
+                return true;
+            }
+            return false;
+        });
     }
 
     public void cmdRegresar_onClick(View v) {
         finish();
     }
 
-    public void  cmdCrear_onClick(View v) {
-        Autor r = lsAutores.Create(
-                Integer.parseInt( txtId.getText().toString() ),
-                txtNombres.getText().toString(),
-                txtApellidos.getText().toString(),
-                txtIsoPais.getText().toString(),
-                Integer.parseInt( txtEdad.getText().toString() )
-        );
-
-        if( r != null ) {
-            Toast.makeText(this, "Autor creado correctamente", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Error al crear Autor!!", Toast.LENGTH_LONG).show();
-        }
+    private void replaceFragment( Fragment fragment ) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
-    public void cmdActualizar_onClick(View v) {
-        Autor r = lsAutores.Update(
-                Integer.parseInt( txtId.getText().toString() ),
-                txtNombres.getText().toString(),
-                txtApellidos.getText().toString(),
-                txtIsoPais.getText().toString(),
-                Integer.parseInt( txtEdad.getText().toString() )
-        );
 
-        if( r != null ) {
-            Toast.makeText(this, "Autor actualizado correctamente", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Error al actualizar Autor!!", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void cmdLeer_onClick(View v) {
-        Autor r = lsAutores.Read_By_Id( Integer.parseInt( txtId.getText().toString() ) );
-        if( r != null ) {
-            txtNombres.setText( r.Nombres );
-            txtApellidos.setText( r.Apellidos );
-            txtIsoPais.setText( r.IsoPais );
-            txtEdad.setText( String.valueOf( r.Edad ) );
-        } else {
-            Toast.makeText(this, "Autor no encontrado!", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void cmdEliminar_onClick(View v) {
-        boolean r = lsAutores.Delete( Integer.parseInt( txtId.getText().toString() ) );
-        if ( r ) {
-            txtId.setText("");
-            txtNombres.setText("");
-            txtApellidos.setText("");
-            txtIsoPais.setText("");
-            txtEdad.setText("");
-            Toast.makeText(this, "Autor eliminado correctamente", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Error al eliminar Autor!!", Toast.LENGTH_LONG).show();
-        }
-    }
 }

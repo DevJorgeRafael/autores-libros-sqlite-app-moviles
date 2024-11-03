@@ -1,14 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.LibrosFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</FrameLayout>
+        <!-- Campo para el ID del libro -->
+        <EditText
+            android:id="@+id/libro_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID del libro (solo para actualizar o eliminar)"
+            android:inputType="number"
+            android:visibility="gone" />
+
+        <!-- Campo para el Título del libro -->
+        <EditText
+            android:id="@+id/libro_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Título del libro" />
+
+        <!-- Campo para el ID del autor -->
+        <EditText
+            android:id="@+id/libro_autor_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID del autor"
+            android:inputType="number" />
+
+        <!-- Campo para el ISBN -->
+        <EditText
+            android:id="@+id/libro_isbn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ISBN del libro" />
+
+        <!-- Campo para el Año de publicación -->
+        <EditText
+            android:id="@+id/libro_anio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Año de publicación"
+            android:inputType="number" />
+
+        <!-- Campo para la Revisión -->
+        <EditText
+            android:id="@+id/libro_revision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Revisión del libro"
+            android:inputType="number" />
+
+        <!-- Campo para el Número de hojas -->
+        <EditText
+            android:id="@+id/libro_nro_hojas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número de hojas"
+            android:inputType="number" />
+
+        <!-- Botones para las operaciones CRUD -->
+        <Button
+            android:id="@+id/btn_create_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crear" />
+
+        <Button
+            android:id="@+id/btn_read_books"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Leer" />
+
+        <Button
+            android:id="@+id/btn_update_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actualizar" />
+
+        <Button
+            android:id="@+id/btn_delete_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Eliminar" />
+
+    </LinearLayout>
+</ScrollView>

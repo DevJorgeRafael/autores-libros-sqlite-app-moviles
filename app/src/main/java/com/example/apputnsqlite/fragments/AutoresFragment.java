@@ -48,7 +48,6 @@ public class AutoresFragment extends Fragment {
         Button cmdActualizar = view.findViewById(R.id.cmdActualizar);
         Button cmdLeer = view.findViewById(R.id.cmdLeer);
         Button cmdEliminar = view.findViewById(R.id.cmdEliminar);
-        Button cmdLibros = view.findViewById(R.id.cmdLibros);
 
         // Establecer onClickListeners
         cmdCrear.setOnClickListener(v -> cmdCrear_onClick());

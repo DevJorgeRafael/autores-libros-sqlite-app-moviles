@@ -1,19 +1,26 @@
 package com.example.apputnsqlite.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apputnsqlite.R;
 import com.example.apputnsqlite.classes.Autor;
+import com.example.apputnsqlite.classes.Libro;
 import com.example.apputnsqlite.dao.Autores;
 import com.example.apputnsqlite.dao.Libros;
 import com.google.android.material.textfield.TextInputEditText;
@@ -29,6 +36,8 @@ public class AutoresFragment extends Fragment {
     private Autores lsAutores;
     private Libros lsLibros;
 
+    private TableLayout tableLayout;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,6 +49,8 @@ public class AutoresFragment extends Fragment {
         txtApellidos = view.findViewById(R.id.txtApellidos);
         txtIsoPais = view.findViewById(R.id.txtIsoPais);
         txtEdad = view.findViewById(R.id.txtEdad);
+
+        tableLayout = view.findViewById(R.id.tableLayoutLibros);
 
         // Inicializar las instancias de Autores y Libros
         lsAutores = new Autores(getContext(), "biblioteca.db", 1);
@@ -99,6 +110,68 @@ public class AutoresFragment extends Fragment {
             txtApellidos.setText(r.Apellidos);
             txtIsoPais.setText(r.IsoPais);
             txtEdad.setText(String.valueOf(r.Edad));
+
+            // Obtener los libros del autor
+            Libro[] libros = lsLibros.Read_ByAutorId(r.Id);
+
+            // Limpiar el TableLayout antes de agregar los nuevos datos
+            tableLayout.removeAllViews();
+
+            // Crear la cabecera de la tabla
+            TableRow headerRow = new TableRow(getContext());
+            headerRow.setBackgroundColor(Color.DKGRAY); // Color de fondo para la cabecera
+
+            // Encabezados de las columnas
+            String[] headers = {"Id", "Título", "ISBN", "Año de Publicación", "N° de Hojas", "Revisión"};
+            for (String header : headers) {
+                TextView headerView = new TextView(getContext());
+                headerView.setText(header);
+                headerView.setPadding(8, 8, 8, 8); // Espaciado interno
+                headerView.setTextColor(Color.WHITE); // Color del texto
+                headerRow.addView(headerView);
+            }
+            tableLayout.addView(headerRow);
+
+            // Agregar los libros a la tabla
+            for (Libro libro : libros) {
+                TableRow row = new TableRow(getContext());
+                row.setBackgroundColor(Color.BLACK); // Color de fondo de la fila
+
+                // Datos del libro
+
+                TextView txtId = new TextView(getContext());
+                txtId.setText(String.valueOf(libro.getId()));
+                txtId.setPadding(8, 8, 8, 8);
+                row.addView(txtId);
+
+                TextView txtTitulo = new TextView(getContext());
+                txtTitulo.setText(libro.getTitulo());
+                txtTitulo.setPadding(8, 8, 8, 8); // Espaciado interno
+                row.addView(txtTitulo);
+
+                TextView txtIsbn = new TextView(getContext());
+                txtIsbn.setText(libro.getIsbn());
+                txtIsbn.setPadding(8, 8, 8, 8);
+                row.addView(txtIsbn);
+
+                TextView txtAnioPublicacion = new TextView(getContext());
+                txtAnioPublicacion.setText(String.valueOf(libro.getAnioPublicacion()));
+                txtAnioPublicacion.setPadding(8, 8, 8, 8);
+                row.addView(txtAnioPublicacion);
+
+                TextView txtNroHojas = new TextView(getContext());
+                txtNroHojas.setText(String.valueOf(libro.getNroHojas()));
+                txtNroHojas.setPadding(8, 8, 8, 8);
+                row.addView(txtNroHojas);
+
+                TextView txtRevision = new TextView(getContext());
+                txtRevision.setText(String.valueOf(libro.getRevision()));
+                txtRevision.setPadding(8, 8, 8, 8);
+                row.addView(txtRevision);
+
+                tableLayout.addView(row);
+            }
+
         } else {
             Toast.makeText(getContext(), "Autor no encontrado!", Toast.LENGTH_LONG).show();
         }

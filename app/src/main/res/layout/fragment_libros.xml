@@ -1,94 +1,204 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="64dp"
     tools:context=".fragments.LibrosFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Campo Id -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_id"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Campo para el ID del libro -->
-        <EditText
-            android:id="@+id/libro_id"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtLibroId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID del libro (solo para actualizar o eliminar)"
-            android:inputType="number"
-            android:visibility="gone" />
+            android:hint="Id"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo para el Título del libro -->
-        <EditText
-            android:id="@+id/libro_titulo"
+    <!-- Campo Título -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_libro_titulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtLibroTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Título del libro" />
+            android:hint="Título del libro"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo para el ID del autor -->
-        <EditText
-            android:id="@+id/libro_autor_id"
+    <!-- Campo ID Autor -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_libro_autor_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_libro_titulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtLibroAutorId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ID del autor"
             android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo para el ISBN -->
-        <EditText
-            android:id="@+id/libro_isbn"
+    <!-- Campo ISBN -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_libro_isbn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_libro_autor_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtLibroIsbn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ISBN del libro" />
+            android:hint="ISBN del libro"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo para el Año de publicación -->
-        <EditText
-            android:id="@+id/libro_anio"
+    <!-- Campo Año de Publicación -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_libro_anio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_libro_isbn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtLibroAnio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Año de publicación"
             android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo para la Revisión -->
-        <EditText
-            android:id="@+id/libro_revision"
+    <!-- Campo Revisión -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_libro_revision"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_libro_anio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtLibroRevision"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Revisión del libro"
             android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo para el Número de hojas -->
-        <EditText
-            android:id="@+id/libro_nro_hojas"
+    <!-- Campo Número de Hojas -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_libro_nro_hojas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_libro_revision"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtLibroNroHojas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Número de hojas"
             android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Botones para las operaciones CRUD -->
-        <Button
-            android:id="@+id/btn_create_book"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Crear" />
 
-        <Button
-            android:id="@+id/btn_read_books"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Leer" />
+    <!-- Botones -->
+    <ImageButton
+        android:id="@+id/cmdCrear"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/baseline_add_24"
+        android:backgroundTint="@color/green"
+        android:onClick="cmdCrear_onClick"
+        android:background="@drawable/background_round_button"
+        app:layout_constraintEnd_toStartOf="@id/cmdActualizar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_libro_nro_hojas" />
 
-        <Button
-            android:id="@+id/btn_update_book"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Actualizar" />
+    <ImageButton
+        android:id="@+id/cmdActualizar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/baseline_edit_24"
+        android:background="@drawable/background_round_button"
+        android:backgroundTint="@color/blue"
+        android:onClick="cmdActualizar_onClick"
+        app:layout_constraintEnd_toStartOf="@id/cmdLeer"
+        app:layout_constraintStart_toEndOf="@id/cmdCrear"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_libro_nro_hojas" />
 
-        <Button
-            android:id="@+id/btn_delete_book"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Eliminar" />
+    <ImageButton
+        android:id="@+id/cmdLeer"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/baseline_remove_red_eye_24"
+        android:background="@drawable/background_round_button"
+        android:backgroundTint="@color/yellow"
+        android:onClick="cmdLeer_onClick"
+        app:layout_constraintEnd_toStartOf="@id/cmdEliminar"
+        app:layout_constraintStart_toEndOf="@id/cmdActualizar"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_libro_nro_hojas" />
 
-    </LinearLayout>
-</ScrollView>
+    <ImageButton
+        android:id="@+id/cmdEliminar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/baseline_delete_24"
+        android:background="@drawable/background_round_button"
+        android:backgroundTint="@color/red"
+        android:onClick="cmdEliminar_onClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cmdLeer"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_libro_nro_hojas" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

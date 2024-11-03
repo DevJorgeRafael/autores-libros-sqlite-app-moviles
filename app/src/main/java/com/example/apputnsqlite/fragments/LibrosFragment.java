@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apputnsqlite.R;
+import com.example.apputnsqlite.classes.Autor;
 import com.example.apputnsqlite.classes.Libro;
+import com.example.apputnsqlite.dao.Autores;
 import com.example.apputnsqlite.dao.Libros;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -26,6 +28,7 @@ public class LibrosFragment extends Fragment {
     // Variables declaradas a nivel de clase
     private TextInputEditText txtLibroId, txtTitulo, txtLibroAutorId, txtIsbn, txtAnio, txtRevision, txtNroHojas;
     private Libros lsLibros;
+    private Autores lsAutores;
 
     @Nullable
     @Override
@@ -43,6 +46,7 @@ public class LibrosFragment extends Fragment {
 
         // Inicializar la instancia de Libros
         lsLibros = new Libros(requireContext(), "biblioteca.db", 1);
+        lsAutores = new Autores(requireContext(), "biblioteca.db", 1);
 
         // Botones
         ImageButton cmdCrear = view.findViewById(R.id.cmdCrear);
@@ -60,6 +64,13 @@ public class LibrosFragment extends Fragment {
     }
 
     public void cmdCrear_onClick() {
+
+        Autor autor = lsAutores.Read_By_Id(Integer.parseInt(txtLibroAutorId.getText().toString()));
+        if (!(autor != null)) {
+            Toast.makeText(getContext(), "Autor no encontrado!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Libro libro = lsLibros.Create(
                 Integer.parseInt(txtLibroId.getText().toString()),
                 txtTitulo.getText().toString(),

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.example.apputnsqlite.R;
 import com.example.apputnsqlite.classes.Autor;
 import com.example.apputnsqlite.dao.Autores;
 import com.example.apputnsqlite.dao.Libros;
+import com.google.android.material.textfield.TextInputEditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +25,7 @@ import com.example.apputnsqlite.dao.Libros;
 public class AutoresFragment extends Fragment {
 
     // Variables declaradas a nivel de clase
-    private TextView txtId, txtNombres, txtApellidos, txtIsoPais, txtEdad;
+    private TextInputEditText txtId, txtNombres, txtApellidos, txtIsoPais, txtEdad;
     private Autores lsAutores;
     private Libros lsLibros;
 
@@ -40,14 +42,14 @@ public class AutoresFragment extends Fragment {
         txtEdad = view.findViewById(R.id.txtEdad);
 
         // Inicializar las instancias de Autores y Libros
-        lsAutores = new Autores(requireContext(), "biblioteca.db", 1);
-        lsLibros = new Libros(requireContext(), "biblioteca.db", 1);
+        lsAutores = new Autores(getContext(), "biblioteca.db", 1);
+        lsLibros = new Libros(getContext(), "biblioteca.db", 1);
 
         // Botones
-        Button cmdCrear = view.findViewById(R.id.cmdCrear);
-        Button cmdActualizar = view.findViewById(R.id.cmdActualizar);
-        Button cmdLeer = view.findViewById(R.id.cmdLeer);
-        Button cmdEliminar = view.findViewById(R.id.cmdEliminar);
+        ImageButton cmdCrear = view.findViewById(R.id.cmdCrear);
+        ImageButton cmdActualizar = view.findViewById(R.id.cmdActualizar);
+        ImageButton cmdLeer = view.findViewById(R.id.cmdLeer);
+        ImageButton cmdEliminar = view.findViewById(R.id.cmdEliminar);
 
         // Establecer onClickListeners
         cmdCrear.setOnClickListener(v -> cmdCrear_onClick());

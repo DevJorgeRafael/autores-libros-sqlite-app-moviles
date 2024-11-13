@@ -213,6 +213,8 @@ public class AutoresFragment extends Fragment {
             // Obtener los libros del autor
             Libro[] libros = lsLibros.Read_ByAutorId(r.Id);
 
+            if( libros.length == 0 ) return;
+            
             // Limpiar el TableLayout antes de agregar los nuevos datos
             tableLayout.removeAllViews();
 

@@ -1,7 +1,6 @@
 # Autores y Libros - Aplicación Móvil con SQLite - By Jorge Rosero
 
 Esta aplicación de Android permite gestionar autores y sus libros utilizando SQLite para el almacenamiento de datos. A continuación, se describen las principales pantallas y funcionalidades de la aplicación, acompañadas de capturas de pantalla.
-Además, muestra un resumen del proceso del CR
 
 ## Tabla de Contenidos
 1. [Pantalla Principal](#pantalla-principal)

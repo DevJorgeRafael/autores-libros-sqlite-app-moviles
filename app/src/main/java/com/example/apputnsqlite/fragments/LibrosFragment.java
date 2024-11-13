@@ -64,13 +64,73 @@ public class LibrosFragment extends Fragment {
     }
 
     public void cmdCrear_onClick() {
+        boolean isValid = true;
 
-        Autor autor = lsAutores.Read_By_Id(Integer.parseInt(txtLibroAutorId.getText().toString()));
-        if (!(autor != null)) {
-            Toast.makeText(getContext(), "Autor no encontrado!", Toast.LENGTH_LONG).show();
-            return;
+        // Validación de los campos de texto
+        if (txtLibroId.getText().toString().isEmpty()) {
+            txtLibroId.setError("El ID del libro no puede estar vacío");
+            isValid = false;
+        } else {
+            txtLibroId.setError(null); // Elimina el error si el campo es válido
         }
 
+        if (txtTitulo.getText().toString().isEmpty()) {
+            txtTitulo.setError("El título no puede estar vacío");
+            isValid = false;
+        } else {
+            txtTitulo.setError(null);
+        }
+
+        if (txtLibroAutorId.getText().toString().isEmpty()) {
+            txtLibroAutorId.setError("El ID del autor no puede estar vacío");
+            isValid = false;
+        } else {
+            txtLibroAutorId.setError(null);
+        }
+
+        if (txtIsbn.getText().toString().isEmpty()) {
+            txtIsbn.setError("El ISBN no puede estar vacío");
+            isValid = false;
+        } else {
+            txtIsbn.setError(null);
+        }
+
+        if (txtAnio.getText().toString().isEmpty()) {
+            txtAnio.setError("El año no puede estar vacío");
+            isValid = false;
+        } else {
+            txtAnio.setError(null);
+        }
+
+        if (txtRevision.getText().toString().isEmpty()) {
+            txtRevision.setError("La revisión no puede estar vacía");
+            isValid = false;
+        } else {
+            txtRevision.setError(null);
+        }
+
+        if (txtNroHojas.getText().toString().isEmpty()) {
+            txtNroHojas.setError("El número de hojas no puede estar vacío");
+            isValid = false;
+        } else {
+            txtNroHojas.setError(null);
+        }
+
+        // Si algún campo no es válido, no continuamos con la creación del libro
+        if (!isValid) {
+            return; // Detiene el proceso si hay errores
+        }
+
+        // Verificación si el autor existe
+        Autor autor = lsAutores.Read_By_Id(Integer.parseInt(txtLibroAutorId.getText().toString()));
+        if (autor == null) {
+            txtLibroAutorId.setError("Autor no encontrado");
+            return;
+        } else {
+            txtLibroAutorId.setError(null); // Elimina el error si el autor existe
+        }
+
+        // Si los campos están llenos y el autor es válido, se crea el libro
         Libro libro = lsLibros.Create(
                 Integer.parseInt(txtLibroId.getText().toString()),
                 txtTitulo.getText().toString(),
@@ -81,6 +141,7 @@ public class LibrosFragment extends Fragment {
                 Integer.parseInt(txtNroHojas.getText().toString())
         );
 
+        // Resultado del intento de creación
         if (libro != null) {
             Toast.makeText(getContext(), "Libro creado correctamente", Toast.LENGTH_LONG).show();
         } else {
@@ -88,8 +149,76 @@ public class LibrosFragment extends Fragment {
         }
     }
 
+
     public void cmdActualizar_onClick() {
-        Libro libro = lsLibros.Create(
+
+        boolean isValid = true;
+
+        // Validación de los campos de texto
+        if (txtLibroId.getText().toString().isEmpty()) {
+            txtLibroId.setError("El ID del libro no puede estar vacío");
+            isValid = false;
+        } else {
+            txtLibroId.setError(null); // Elimina el error si el campo es válido
+        }
+
+        if (txtTitulo.getText().toString().isEmpty()) {
+            txtTitulo.setError("El título no puede estar vacío");
+            isValid = false;
+        } else {
+            txtTitulo.setError(null);
+        }
+
+        if (txtLibroAutorId.getText().toString().isEmpty()) {
+            txtLibroAutorId.setError("El ID del autor no puede estar vacío");
+            isValid = false;
+        } else {
+            txtLibroAutorId.setError(null);
+        }
+
+        if (txtIsbn.getText().toString().isEmpty()) {
+            txtIsbn.setError("El ISBN no puede estar vacío");
+            isValid = false;
+        } else {
+            txtIsbn.setError(null);
+        }
+
+        if (txtAnio.getText().toString().isEmpty()) {
+            txtAnio.setError("El año no puede estar vacío");
+            isValid = false;
+        } else {
+            txtAnio.setError(null);
+        }
+
+        if (txtRevision.getText().toString().isEmpty()) {
+            txtRevision.setError("La revisión no puede estar vacía");
+            isValid = false;
+        } else {
+            txtRevision.setError(null);
+        }
+
+        if (txtNroHojas.getText().toString().isEmpty()) {
+            txtNroHojas.setError("El número de hojas no puede estar vacío");
+            isValid = false;
+        } else {
+            txtNroHojas.setError(null);
+        }
+
+        // Si algún campo no es válido, no continuamos con la creación del libro
+        if (!isValid) {
+            return; // Detiene el proceso si hay errores
+        }
+
+        // Verificación si el autor existe
+        Autor autor = lsAutores.Read_By_Id(Integer.parseInt(txtLibroAutorId.getText().toString()));
+        if (autor == null) {
+            txtLibroAutorId.setError("Autor no encontrado");
+            return;
+        } else {
+            txtLibroAutorId.setError(null); // Elimina el error si el autor existe
+        }
+
+        Libro libro = lsLibros.Update(
                 Integer.parseInt(txtLibroId.getText().toString()),
                 txtTitulo.getText().toString(),
                 Integer.parseInt(txtLibroAutorId.getText().toString()),
@@ -107,21 +236,31 @@ public class LibrosFragment extends Fragment {
     }
 
     public void cmdLeer_onClick() {
-        Libro libro = lsLibros.Read_ById(Integer.parseInt(txtLibroId.getText().toString()));
+        if( txtLibroId.getText().toString().isEmpty() ) {
+            txtLibroId.setError("El ID del libro no puede estar vacío");
+            return;
+        }
+
+        Libro libro =  (Libro) lsLibros.Read_ById(Integer.parseInt(txtLibroId.getText().toString()));
         if (libro != null) {
-            txtLibroId.setText(libro.getId());
-            txtTitulo.setText(libro.getTitulo());
-            txtLibroAutorId.setText(libro.getIdAutor());
-            txtIsbn.setText(libro.getIsbn());
-            txtAnio.setText(libro.getAnioPublicacion());
-            txtRevision.setText(libro.getRevision());
-            txtNroHojas.setText(libro.getNroHojas());
+
+            txtTitulo.setText(libro.getTitulo() != null ? libro.getTitulo() : "");
+            txtLibroAutorId.setText(String.valueOf(libro.getIdAutor()));
+            txtIsbn.setText(libro.getIsbn() != null ? libro.getIsbn() : "");
+            txtAnio.setText(String.valueOf(libro.getAnioPublicacion()));
+            txtRevision.setText(String.valueOf(libro.getRevision()));
+            txtNroHojas.setText(String.valueOf(libro.getNroHojas()));
         } else {
             Toast.makeText(getContext(), "Libro no encontrado!", Toast.LENGTH_LONG).show();
         }
     }
 
     public void cmdEliminar_onClick() {
+        if( txtLibroId.getText().toString().isEmpty() ) {
+            txtLibroId.setError("El ID del libro no puede estar vacío");
+            return;
+        }
+
         boolean eliminado = lsLibros.Delete(Integer.parseInt(txtLibroId.getText().toString()));
         if (eliminado) {
             txtLibroId.setText("");

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,50 @@ public class AutoresFragment extends Fragment {
     }
 
     public void cmdCrear_onClick() {
+        boolean isValid = true;
+
+        // Validación de los campos de texto
+        if (txtId.getText().toString().isEmpty()) {
+            txtId.setError("El ID no puede estar vacío");
+            isValid = false;
+        } else {
+            txtId.setError(null); // Elimina el error si el campo es válido
+        }
+
+        if (txtNombres.getText().toString().isEmpty()) {
+            txtNombres.setError("El nombre no puede estar vacío");
+            isValid = false;
+        } else {
+            txtNombres.setError(null);
+        }
+
+        if (txtApellidos.getText().toString().isEmpty()) {
+            txtApellidos.setError("Los apellidos no pueden estar vacíos");
+            isValid = false;
+        } else {
+            txtApellidos.setError(null);
+        }
+
+        if (txtIsoPais.getText().toString().isEmpty()) {
+            txtIsoPais.setError("El código de país no puede estar vacío");
+            isValid = false;
+        } else {
+            txtIsoPais.setError(null);
+        }
+
+        if (txtEdad.getText().toString().isEmpty()) {
+            txtEdad.setError("La edad no puede estar vacía");
+            isValid = false;
+        } else {
+            txtEdad.setError(null);
+        }
+
+        // Si algún campo no es válido, no creamos el autor
+        if (!isValid) {
+            return; // Detiene el proceso si hay errores
+        }
+
+        // Si los campos están llenos, se crea el autor
         Autor r = lsAutores.Create(
                 Integer.parseInt(txtId.getText().toString()),
                 txtNombres.getText().toString(),
@@ -80,6 +125,7 @@ public class AutoresFragment extends Fragment {
                 Integer.parseInt(txtEdad.getText().toString())
         );
 
+        // Resultado del intento de creación
         if (r != null) {
             Toast.makeText(getContext(), "Autor creado correctamente", Toast.LENGTH_LONG).show();
         } else {
@@ -87,7 +133,52 @@ public class AutoresFragment extends Fragment {
         }
     }
 
+
     public void cmdActualizar_onClick() {
+        boolean isValid = true;
+
+        // Validación de los campos de texto
+        if (txtId.getText().toString().isEmpty()) {
+            txtId.setError("El ID no puede estar vacío");
+            isValid = false;
+        } else {
+            txtId.setError(null); // Elimina el error si el campo es válido
+        }
+
+        if (txtNombres.getText().toString().isEmpty()) {
+            txtNombres.setError("El nombre no puede estar vacío");
+            isValid = false;
+        } else {
+            txtNombres.setError(null);
+        }
+
+        if (txtApellidos.getText().toString().isEmpty()) {
+            txtApellidos.setError("Los apellidos no pueden estar vacíos");
+            isValid = false;
+        } else {
+            txtApellidos.setError(null);
+        }
+
+        if (txtIsoPais.getText().toString().isEmpty()) {
+            txtIsoPais.setError("El código de país no puede estar vacío");
+            isValid = false;
+        } else {
+            txtIsoPais.setError(null);
+        }
+
+        if (txtEdad.getText().toString().isEmpty()) {
+            txtEdad.setError("La edad no puede estar vacía");
+            isValid = false;
+        } else {
+            txtEdad.setError(null);
+        }
+
+        // Si algún campo no es válido, no actualizamos el autor
+        if (!isValid) {
+            return; // Detiene el proceso si hay errores
+        }
+
+        // Si los campos están llenos, se actualiza el autor
         Autor r = lsAutores.Update(
                 Integer.parseInt(txtId.getText().toString()),
                 txtNombres.getText().toString(),
@@ -96,6 +187,7 @@ public class AutoresFragment extends Fragment {
                 Integer.parseInt(txtEdad.getText().toString())
         );
 
+        // Resultado del intento de actualización
         if (r != null) {
             Toast.makeText(getContext(), "Autor actualizado correctamente", Toast.LENGTH_LONG).show();
         } else {
@@ -103,7 +195,14 @@ public class AutoresFragment extends Fragment {
         }
     }
 
+
     public void cmdLeer_onClick() {
+
+        if( txtId.getText().toString().isEmpty() ) {
+            txtId.setError("El ID no puede estar vacío");
+            return;
+        }
+
         Autor r = lsAutores.Read_By_Id(Integer.parseInt(txtId.getText().toString()));
         if (r != null) {
             txtNombres.setText(r.Nombres);
@@ -128,6 +227,10 @@ public class AutoresFragment extends Fragment {
                 headerView.setText(header);
                 headerView.setPadding(8, 8, 8, 8); // Espaciado interno
                 headerView.setTextColor(Color.WHITE); // Color del texto
+                headerView.setMaxWidth(200); //limita el ancho máximo de cada columna
+                headerView.setSingleLine(false); //permite el salto de línea
+                headerView.setEllipsize(null); //desactiva el recorte automático de texto
+                headerView.setGravity(Gravity.CENTER);
                 headerRow.addView(headerView);
             }
             tableLayout.addView(headerRow);
@@ -178,6 +281,11 @@ public class AutoresFragment extends Fragment {
     }
 
     public void cmdEliminar_onClick() {
+        if( txtId.getText().toString().isEmpty() ) {
+            txtId.setError("El ID no puede estar vacío");
+            return;
+        }
+
         boolean r = lsAutores.Delete(Integer.parseInt(txtId.getText().toString()));
         if (r) {
             txtId.setText("");
